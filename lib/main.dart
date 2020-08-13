@@ -39,7 +39,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.lightBlue,
         fontFamily: 'BebasNeue',
       ),
-      home: SplashScreen(),
+      home: LoadingScreen(),
       routes: routes,
     );
   }

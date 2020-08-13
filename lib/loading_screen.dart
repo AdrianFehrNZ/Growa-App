@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:growa_app/initial_page.dart';
 
 class LoadingScreen extends StatefulWidget {
   static String tag = 'LoadingScreen';
@@ -17,12 +18,14 @@ class _LoadingScreenState extends State<LoadingScreen>
     animationController = new AnimationController(
       vsync: this,
       duration: new Duration(seconds: 2),
-    )..addListener(() => setState(() {}));
+    )..forward();
     animation = CurvedAnimation(
       parent: animationController,
       curve: Curves.easeInOut,
-    );
-    animationController.forward();
+    )..addStatusListener((AnimationStatus status) {
+      if (status == AnimationStatus.completed)
+        Navigator.of(context).pushNamed(InitialPage.tag);
+    });
   }
 
   @override
