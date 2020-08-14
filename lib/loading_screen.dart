@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:growa_app/initial_page.dart';
+import 'package:growa_app/login.dart';
 
 class LoadingScreen extends StatefulWidget {
   static String tag = 'LoadingScreen';
@@ -24,7 +24,7 @@ class _LoadingScreenState extends State<LoadingScreen>
       curve: Curves.easeInOut,
     )..addStatusListener((AnimationStatus status) {
       if (status == AnimationStatus.completed)
-        Navigator.of(context).pushNamed(InitialPage.tag);
+        Navigator.of(context).pushNamed(Login.tag);
     });
   }
 

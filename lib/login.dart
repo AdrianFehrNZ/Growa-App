@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'initial_page.dart';
 import 'package:flutter/services.dart';
-import 'dart:io';
 
 class Login extends StatefulWidget {
   static String tag = 'login-page';
@@ -13,11 +12,6 @@ class Login extends StatefulWidget {
 class _LoginState extends State<Login> {
   @override
   Widget build(BuildContext context) {
-//    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-//      systemNavigationBarColor: Colors.green,
-//      systemNavigationBarIconBrightness: Brightness.light,
-//      //bottom bar color
-//    ));
 
     final bottom = MediaQuery.of(context).viewInsets.bottom;
     final double contHeight = MediaQuery.of(context).size.height / 10;

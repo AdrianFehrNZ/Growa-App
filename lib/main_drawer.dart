@@ -18,16 +18,6 @@ class MainDrawer extends StatelessWidget {
                     ),
                   ),
                   Text('growa@gmail.com'),
-//                FractionallySizedBox(
-//                  widthFactor: .5,
-//                  child: Container(
-//                      decoration: new BoxDecoration(
-//                          shape: BoxShape.circle,
-//                          image: new DecorationImage(
-//                              fit: BoxFit.cover,
-//                              image: new NetworkImage(
-//                                  "https://cdn.vox-cdn.com/thumbor/sR-BKibqOZGqn3ObBF_k9rCVf_o=/250x250/cdn.vox-cdn.com/uploads/chorus_asset/file/16256345/google_maps_parking_1.jpg")))),
-//                ),
                 ],
               ),
             ),

@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:carousel_slider/carousel_slider.dart';
 
 class OverviewPage extends StatelessWidget {
   static String tag = 'OverviewPage';
@@ -15,14 +14,6 @@ class OverviewPage extends StatelessWidget {
         style: TextStyle(fontSize: 28.0, color: Colors.white),
       ),
     );
-
-//    final gardenImages = CarouselSlider(
-//      height: 400.0,
-//      autoPlay: false,
-//      enlargeCenterPage: true,
-//      viewportFraction: 0.9,
-//      aspectRatio: 2.0,
-//    );
 
     final gardenImage = Padding(
       padding: EdgeInsets.all(10.0),

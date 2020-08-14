@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:growa_app/initial_page.dart';
 import 'package:growa_app/loading_screen.dart';
-import 'package:growa_app/splash_screen.dart';
+import 'file:///D:/Documents/GitHub/GROWA/Misc%20Ideas/splash_screen.dart';
 import 'package:growa_app/stats_page.dart';
 import 'login.dart';
 import 'package:flutter/services.dart';
@@ -18,6 +18,7 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
+
   final routes = <String, WidgetBuilder>{
     InitialPage.tag: (context) => InitialPage(),
     Login.tag: (context) => Login(),

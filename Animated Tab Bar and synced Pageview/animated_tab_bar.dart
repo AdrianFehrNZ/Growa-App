@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:growa_app/tab_item.dart';
+import 'file:///D:/Documents/GitHub/GROWA/Animated%20Tab%20Bar%20and%20synced%20Pageview/tab_item.dart';
 import 'package:vector_math/vector_math.dart' as vector;
 
 class AnimatedTabBar extends StatefulWidget {
@@ -69,7 +69,7 @@ class _AnimatedTabBarState extends State<AnimatedTabBar>
       });
   }
 
-  _initAnimationAndStart(double from, double to) {
+  initAnimationAndStart(double from, double to) {
     _positionTween.begin = from;
     _positionTween.end = to;
     _animationController.reset();
@@ -104,9 +104,9 @@ class _AnimatedTabBarState extends State<AnimatedTabBar>
                   setState(() {
                     nextIcon = Icons.looks_one;
                     currentSelected = 0;
-                    widget.callback(currentSelected);
+//                    widget.callback(currentSelected);
                   });
-                  _initAnimationAndStart(_positionAnimation.value, -1.0);
+                  initAnimationAndStart(_positionAnimation.value, -1.0);
                 },
               ),
               TabItem(
@@ -117,9 +117,9 @@ class _AnimatedTabBarState extends State<AnimatedTabBar>
                   setState(() {
                     nextIcon = Icons.home;
                     currentSelected = 1;
-                    widget.callback(currentSelected);
+//                    widget.callback(currentSelected);
                   });
-                  _initAnimationAndStart(_positionAnimation.value, 0.0);
+                  initAnimationAndStart(_positionAnimation.value, 0.0);
                 },
               ),
               TabItem(
@@ -130,9 +130,10 @@ class _AnimatedTabBarState extends State<AnimatedTabBar>
                   setState(() {
                     nextIcon = Icons.looks_two;
                     currentSelected = 2;
-                    widget.callback(currentSelected);
+                    Navigator.push(context, route)
+//                    widget.callback(currentSelected);
                   });
-                  _initAnimationAndStart(_positionAnimation.value, 1.0);
+                  initAnimationAndStart(_positionAnimation.value, 1.0);
                 },
               ),
             ],
