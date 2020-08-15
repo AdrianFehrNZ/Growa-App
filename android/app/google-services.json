@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "876711588225",
+    "firebase_url": "https://growa-ef8ab.firebaseio.com",
+    "project_id": "growa-ef8ab",
+    "storage_bucket": "growa-ef8ab.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:876711588225:android:32f8a414e0303d8d86b880",
+        "android_client_info": {
+          "package_name": "com.example.growa_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "876711588225-10svc8aq0cd63ckn2rvhc0l82ejvmqtt.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCe8nt81XySDH4ilHGaTwaVjdLHGtFFogk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "876711588225-10svc8aq0cd63ckn2rvhc0l82ejvmqtt.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -34,8 +34,6 @@ class OverviewPage extends StatelessWidget {
             children: <Widget>[
               welcome,
               gardenImage,
-              gardenImage,
-              gardenImage
             ],
           ),
         ),

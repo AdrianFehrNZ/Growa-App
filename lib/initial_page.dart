@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:growa_app/main_drawer.dart';
 import 'package:flutter/services.dart';
 import 'package:growa_app/overview_page.dart';
+import 'package:growa_app/produce_page.dart';
 import 'package:growa_app/stats_page.dart';
 
 class InitialPage extends StatefulWidget {
@@ -39,9 +40,14 @@ class _InitialPageState extends State<InitialPage>
 
   void _onItemTapped(int index) {
     setState(() {
-      _selectedIndex = index;
-      _pageController.animateToPage(index,
-          duration: Duration(milliseconds: 500), curve: Curves.easeOut);
+      if (index - _selectedIndex > 1 || index - _selectedIndex < -1) {
+        _selectedIndex = index;
+        _pageController.jumpToPage(index);
+      } else {
+        _selectedIndex = index;
+        _pageController.animateToPage(index,
+            duration: Duration(milliseconds: 500), curve: Curves.easeOut);
+      }
     });
   }
 
@@ -123,12 +129,10 @@ class _InitialPageState extends State<InitialPage>
               },
               children: <Widget>[
                 Container(
-                  color: Colors.red,
-                ),
-                OverviewPage(),
-                Container(
                   color: Colors.green,
                 ),
+                OverviewPage(),
+                ProducePage(),
               ],
             ),
           ),
