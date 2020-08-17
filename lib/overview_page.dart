@@ -6,7 +6,6 @@ class OverviewPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     final welcome = Padding(
       padding: EdgeInsets.all(8.0),
       child: Text(
@@ -23,10 +22,13 @@ class OverviewPage extends StatelessWidget {
     return Container(
       width: MediaQuery.of(context).size.width,
       decoration: BoxDecoration(
-        gradient: LinearGradient(colors: [
-          Colors.blue,
-          Colors.lightBlueAccent,
-        ]),
+        gradient: LinearGradient(
+            begin: Alignment.bottomCenter,
+            end: Alignment.topCenter,
+            colors: [
+              Colors.blue,
+              Colors.lightBlueAccent,
+            ]),
       ),
       child: CupertinoScrollbar(
         child: SingleChildScrollView(

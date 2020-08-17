@@ -1,6 +1,11 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:growa_app/produce_record.dart';
+import 'package:growa_app/planner_list_tile.dart';
+
+const Color _colorOne = Color(0x33000000);
+const Color _colorTwo = Color(0x24000000);
+const Color _colorThree = Color(0x1F000000);
 
 class ProducePage extends StatefulWidget {
   @override
@@ -8,16 +13,157 @@ class ProducePage extends StatefulWidget {
 }
 
 class _ProducePageState extends State<ProducePage> {
+  int sharedValue = 0;
+  PageController _pageController;
+
+  ListView listView_0 = ListView.builder(
+    itemCount: 20,
+    itemBuilder: (BuildContext context, sharedValue) {
+      return PlannerListTile(0);
+    },
+  );
+
+  ListView listView_1 = ListView.builder(
+    itemCount: 20,
+    itemBuilder: (BuildContext context, sharedValue) {
+      return PlannerListTile(1);
+    },
+  );
+
+  ListView listView_2 = ListView.builder(
+    itemCount: 20,
+    itemBuilder: (BuildContext context, sharedValue) {
+      return PlannerListTile(2);
+    },
+  );
+
+  ListView listView_3 = ListView.builder(
+    itemCount: 20,
+    itemBuilder: (BuildContext context, sharedValue) {
+      return PlannerListTile(3);
+    },
+  );
+
+  void _onItemTapped(int index) {
+    setState(() {
+      _pageController.jumpToPage(index);
+    });
+  }
+
+  @override
+  void dispose() {
+    _pageController.dispose();
+    super.dispose();
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _pageController = PageController(initialPage: 0);
+  }
+
+  final Map<int, Widget> seasonLists = <int, Widget>{
+    0: Text('Spring'),
+    1: Text('Summer'),
+    2: Text('Autumn'),
+    3: Text('Winter'),
+  };
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        centerTitle: true,
-        title: Text('Produce Encyclopedia'),
+      body: Container(
+        width: MediaQuery.of(context).size.width,
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+              begin: Alignment.bottomCenter,
+              end: Alignment.topCenter,
+              colors: [
+                Colors.blue,
+                Colors.lightBlueAccent,
+              ]),
+        ),
+        child: Column(
+          children: <Widget>[
+            Padding(
+              padding: EdgeInsets.symmetric(
+                vertical: 8.0,
+                horizontal: 16.0,
+              ),
+            ),
+            Padding(
+              padding: EdgeInsets.symmetric(
+                vertical: 8.0,
+                horizontal: 16.0,
+              ),
+              child: Container(
+                width: MediaQuery.of(context).size.width - 32.0,
+                decoration: BoxDecoration(
+                  color: CupertinoColors.white,
+                  borderRadius: BorderRadius.circular(3.0),
+                  boxShadow: <BoxShadow>[
+                    BoxShadow(
+                      offset: Offset(0.0, 3.0),
+                      blurRadius: 5.0,
+                      spreadRadius: -1.0,
+                      color: _colorOne,
+                    ),
+                    BoxShadow(
+                      offset: Offset(0.0, 6.0),
+                      blurRadius: 10.0,
+                      spreadRadius: 0.0,
+                      color: _colorTwo,
+                    ),
+                    BoxShadow(
+                      offset: Offset(0.0, 1.0),
+                      blurRadius: 18.0,
+                      spreadRadius: 0.0,
+                      color: _colorThree,
+                    ),
+                  ],
+                ),
+                child: CupertinoSegmentedControl<int>(
+                  padding: EdgeInsets.symmetric(
+                    horizontal: 0.0,
+                  ),
+                  borderColor: Colors.transparent,
+                  selectedColor: Color.fromRGBO(61, 8, 89, 100),
+                  unselectedColor: Colors.white,
+                  pressedColor: Color.fromRGBO(61, 8, 89, 100),
+                  children: seasonLists,
+                  onValueChanged: (int val) {
+                    setState(
+                      () {
+                        sharedValue = val;
+                        _onItemTapped(sharedValue);
+                      },
+                    );
+                  },
+                  groupValue: sharedValue,
+                ),
+              ),
+            ),
+            Expanded(
+              child: PageView(
+                controller: _pageController,
+                physics: NeverScrollableScrollPhysics(),
+                onPageChanged: (index) {
+                  setState(() => sharedValue = index);
+                },
+                children: <Widget>[
+                  listView_0,
+                  listView_1,
+                  listView_2,
+                  listView_3,
+                ],
+              ),
+            ),
+          ],
+        ),
       ),
-      body: Text('body'),
     );
   }
+
   Widget _buildBody(BuildContext context) {
     return StreamBuilder<QuerySnapshot>(
       stream: Firestore.instance.collection('rides').snapshots(),
@@ -37,10 +183,7 @@ class _ProducePageState extends State<ProducePage> {
   }
 
   Widget _buildListItem(BuildContext context, DocumentSnapshot data) {
-    final produceRecord = ProduceRecord.fromSnapshot(data);
-
     return Padding(
-      key: ValueKey(produceRecord.name),
       padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
       child: Container(
         decoration: BoxDecoration(
@@ -48,12 +191,9 @@ class _ProducePageState extends State<ProducePage> {
           borderRadius: BorderRadius.circular(5.0),
         ),
         child: ListTile(
-            leading: new Image(
-              image: new NetworkImage(produceRecord.image),
+            leading: Image(
+              image: AssetImage('assets/logo.jpg'),
             ),
-            title: Text(produceRecord.model + ", " + produceRecord.name),
-            subtitle: Text(produceRecord.toString()),
-            trailing: Text(produceRecord.price.toString()),
             isThreeLine: true,
             onTap: () {
 //              Navigator.push(context,

@@ -18,7 +18,7 @@ class _InitialPageState extends State<InitialPage>
   int _selectedIndex = 1;
   PageController _pageController;
 
-  Route _createRoute() {
+  Route _statsRoute() {
     return PageRouteBuilder(
       pageBuilder: (context, animation, secondaryAnimation) => StatsPage(),
       transitionsBuilder: (context, animation, secondaryAnimation, child) {
@@ -91,33 +91,42 @@ class _InitialPageState extends State<InitialPage>
           key: _scaffoldKey,
           drawer: MainDrawer(),
           appBar: AppBar(
-            backgroundColor: Colors.white,
-            title: Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: <Widget>[
-                Hero(
-                    tag: 'heroHome',
-                    child:
-                        Image.asset('assets/logo.jpg', fit: BoxFit.scaleDown)),
-                Text(
-                  'GROWA',
-                  style: TextStyle(
-                    fontFamily: 'BebasNeue',
-                    color: Color.fromRGBO(61, 8, 89, 100),
+            leading: Hero(
+              tag: 'heroHome',
+              child: IconButton(
+                icon: Container(
+                  child: Image(
+                    image: AssetImage("assets/logo.jpg"),
+                    color: null,
+                    fit: BoxFit.scaleDown,
+                    alignment: Alignment.center,
                   ),
                 ),
-              ],
+                onPressed: () => _scaffoldKey.currentState.openDrawer(),
+              ),
             ),
+            backgroundColor: Colors.white,
+            centerTitle: true,
+            title: Text(
+              'GROWA',
+              textScaleFactor: 1.75,
+              style: TextStyle(
+                fontFamily: 'BebasNeue',
+                color: Color.fromRGBO(61, 8, 89, 100),
+              ),
+            ),
+//              ],
+//            ),
             actions: <Widget>[
               IconButton(
                 onPressed: () {
-                  Navigator.of(context).push(_createRoute());
+                  Navigator.of(context).push(_statsRoute());
                 },
-                splashColor: Colors.purple,
                 icon: Icon(
                   Icons.assessment,
                   color: Color.fromRGBO(61, 8, 89, 100),
                 ),
+                highlightColor: Colors.white30,
               ),
             ],
           ),
@@ -159,7 +168,7 @@ class _InitialPageState extends State<InitialPage>
                 ),
                 BottomNavigationBarItem(
                   icon: Icon(Icons.nature),
-                  title: Text('Produce'),
+                  title: Text('Produce Planner'),
                 ),
               ],
               currentIndex: _selectedIndex,

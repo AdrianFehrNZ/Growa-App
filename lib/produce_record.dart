@@ -1,4 +1,3 @@
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class ProduceRecord {
@@ -35,7 +34,6 @@ class ProduceRecord {
 
   String getDocID() {
     return this.reference.documentID;
-
   }
 
   @override
