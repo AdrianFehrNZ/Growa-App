@@ -15,33 +15,19 @@ class ProducePage extends StatefulWidget {
 class _ProducePageState extends State<ProducePage> {
   int sharedValue = 0;
   PageController _pageController;
+  var _scrollController = ScrollController();
+  ScrollPhysics _physics = ClampingScrollPhysics();
 
-  ListView listView_0 = ListView.builder(
-    itemCount: 20,
-    itemBuilder: (BuildContext context, sharedValue) {
-      return PlannerListTile(0);
-    },
-  );
-
-  ListView listView_1 = ListView.builder(
-    itemCount: 20,
-    itemBuilder: (BuildContext context, sharedValue) {
-      return PlannerListTile(1);
-    },
-  );
-
-  ListView listView_2 = ListView.builder(
-    itemCount: 20,
-    itemBuilder: (BuildContext context, sharedValue) {
-      return PlannerListTile(2);
-    },
-  );
-
-  ListView listView_3 = ListView.builder(
-    itemCount: 20,
-    itemBuilder: (BuildContext context, sharedValue) {
-      return PlannerListTile(3);
-    },
+  final producePlannerTitle = Padding(
+    padding: EdgeInsets.only(
+      left: 16.0,
+      right: 16.0,
+      top: 16.0,
+    ),
+    child: Text(
+      'Produce Planner',
+      style: TextStyle(fontSize: 28.0, color: Colors.white),
+    ),
   );
 
   void _onItemTapped(int index) {
@@ -60,6 +46,13 @@ class _ProducePageState extends State<ProducePage> {
   void initState() {
     super.initState();
     _pageController = PageController(initialPage: 0);
+
+    _scrollController.addListener(() {
+      if (_scrollController.position.pixels <= 56)
+        setState(() => _physics = ClampingScrollPhysics());
+      else
+        setState(() => _physics = BouncingScrollPhysics());
+    });
   }
 
   final Map<int, Widget> seasonLists = <int, Widget>{
@@ -71,6 +64,42 @@ class _ProducePageState extends State<ProducePage> {
 
   @override
   Widget build(BuildContext context) {
+    ListView listView_0 = ListView.builder(
+      itemCount: 20,
+      itemBuilder: (BuildContext context, sharedValue) {
+        return PlannerListTile(0);
+      },
+      physics: _physics,
+      controller: _scrollController,
+    );
+
+    ListView listView_1 = ListView.builder(
+      itemCount: 20,
+      itemBuilder: (BuildContext context, sharedValue) {
+        return PlannerListTile(1);
+      },
+      physics: _physics,
+      controller: _scrollController,
+    );
+
+    ListView listView_2 = ListView.builder(
+      itemCount: 20,
+      itemBuilder: (BuildContext context, sharedValue) {
+        return PlannerListTile(2);
+      },
+      physics: _physics,
+      controller: _scrollController,
+    );
+
+    ListView listView_3 = ListView.builder(
+      itemCount: 20,
+      itemBuilder: (BuildContext context, sharedValue) {
+        return PlannerListTile(3);
+      },
+      physics: _physics,
+      controller: _scrollController,
+    );
+
     return Scaffold(
       body: Container(
         width: MediaQuery.of(context).size.width,
@@ -85,10 +114,13 @@ class _ProducePageState extends State<ProducePage> {
         ),
         child: Column(
           children: <Widget>[
+            producePlannerTitle,
             Padding(
-              padding: EdgeInsets.symmetric(
-                vertical: 8.0,
-                horizontal: 16.0,
+              padding: EdgeInsets.only(
+                top: 0.0,
+                left: 16.0,
+                right: 16.0,
+                bottom: 8.0,
               ),
             ),
             Padding(
@@ -164,42 +196,42 @@ class _ProducePageState extends State<ProducePage> {
     );
   }
 
-  Widget _buildBody(BuildContext context) {
-    return StreamBuilder<QuerySnapshot>(
-      stream: Firestore.instance.collection('rides').snapshots(),
-      builder: (context, snapshot) {
-        if (!snapshot.hasData) return LinearProgressIndicator();
-
-        return _buildList(context, snapshot.data.documents);
-      },
-    );
-  }
-
-  Widget _buildList(BuildContext context, List<DocumentSnapshot> snapshot) {
-    return ListView(
-      padding: const EdgeInsets.only(top: 20.0),
-      children: snapshot.map((data) => _buildListItem(context, data)).toList(),
-    );
-  }
-
-  Widget _buildListItem(BuildContext context, DocumentSnapshot data) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
-      child: Container(
-        decoration: BoxDecoration(
-          border: Border.all(color: Colors.black),
-          borderRadius: BorderRadius.circular(5.0),
-        ),
-        child: ListTile(
-            leading: Image(
-              image: AssetImage('assets/logo.jpg'),
-            ),
-            isThreeLine: true,
-            onTap: () {
-//              Navigator.push(context,
-//                  MaterialPageRoute(builder: (context) => DetailPage(record)));
-            }),
-      ),
-    );
-  }
+//  Widget _buildBody(BuildContext context) {
+//    return StreamBuilder<QuerySnapshot>(
+//      stream: Firestore.instance.collection('rides').snapshots(),
+//      builder: (context, snapshot) {
+//        if (!snapshot.hasData) return LinearProgressIndicator();
+//
+//        return _buildList(context, snapshot.data.documents);
+//      },
+//    );
+//  }
+//
+//  Widget _buildList(BuildContext context, List<DocumentSnapshot> snapshot) {
+//    return ListView(
+//      padding: const EdgeInsets.only(top: 20.0),
+//      children: snapshot.map((data) => _buildListItem(context, data)).toList(),
+//    );
+//  }
+//
+//  Widget _buildListItem(BuildContext context, DocumentSnapshot data) {
+//    return Padding(
+//      padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+//      child: Container(
+//        decoration: BoxDecoration(
+//          border: Border.all(color: Colors.black),
+//          borderRadius: BorderRadius.circular(5.0),
+//        ),
+//        child: ListTile(
+//            leading: Image(
+//              image: AssetImage('assets/logo.jpg'),
+//            ),
+//            isThreeLine: true,
+//            onTap: () {
+////              Navigator.push(context,
+////                  MaterialPageRoute(builder: (context) => DetailPage(record)));
+//            }),
+//      ),
+//    );
+//  }
 }
